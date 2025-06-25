@@ -14,4 +14,10 @@ World::World() {
 
 	southHouse->SetConnection(Direction::West, westHouse);
 	southHouse->SetConnection(Direction::East, behindHouse);
+
+	startRoom = westHouse;
+}
+
+Room* World::GetStartRoom() {
+	return startRoom;
 }

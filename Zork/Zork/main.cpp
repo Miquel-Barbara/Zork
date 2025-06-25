@@ -1,29 +1,23 @@
 #include <iostream>
 #include <string>
-#include "World.h"
+#include "Game.h"
+
 
 using namespace std;
 
 int main() {
 
-    string command;
+    string input;
 
-    cout << "Welcome to Zork I: Made by Miquel Barbarà Garrido!" << endl;
+    cout << "Welcome to Zork I: Made by Miquel Barbara Garrido!" << endl;
 
-    World world;
+    Game game;
 
     while (true) {
         cout << "\n>";
-        getline(cin, command);
+        getline(cin, input);
 
-        if (command == "quit") {
-			cout << "Thank you for playing Zork I!" << endl;
-			break;
-		} else if (command == "help") {
-			cout << "Available commands: quit" << endl;
-		} else {
-			cout << "Unknown command: " << command << endl;
-		}
+        game.ProcessInput(input);
     }
 
 	cout << "Exiting the game..." << endl;

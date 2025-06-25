@@ -12,11 +12,12 @@ using namespace std;
 class Room {
 public:
 	Room(const string& name, const string& description);
-	void SetConnection(Direction direction, Room* room);
-	Room* GetConnectedRoom(Direction direction) const;
 
-	string GetName() const;
-	string GetDescription() const;
+	void SetConnection(Direction direction, Room* room);
+	Room* GetConnectedRoom(Direction direction);
+
+	string GetName();
+	string GetDescription();
 
 private:
 	string name;
