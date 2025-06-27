@@ -6,6 +6,7 @@
 #include <time.h>
 #include "Room.h"
 
+class Room;
 
 class World {
 public:

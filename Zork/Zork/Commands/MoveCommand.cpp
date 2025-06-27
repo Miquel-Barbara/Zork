@@ -3,6 +3,12 @@
 #include "../Direction.h"
 #include <iostream>
 
+map<int, string> MoveCommand::GetPattern() const {
+	return {
+		{0, "go"}
+	};
+}
+
 bool MoveCommand::Execute(Game& game, const vector<string>& args) {
     if (args.size() < 2) {
         return false;

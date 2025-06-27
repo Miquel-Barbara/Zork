@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Room.h"
 
-Room::Room(const string& name, const string& description): name(name), description(description) {
+Room::Room(const string& name, const string& description): Entity(name, description) {
 	//cout << "Created room "+name+"." << endl;
 }
 
@@ -16,12 +16,4 @@ Room* Room::GetConnectedRoom(Direction direction) {
 		return it->second;
 	}
 	return nullptr;
-}
-
-string Room::GetName() {
-	return name;
-}
-
-string Room::GetDescription() {
-	return description;
 }

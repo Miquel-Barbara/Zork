@@ -127,8 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Commands\InteractCommand.cpp" />
+    <ClCompile Include="Commands\Inventory\DropCommand.cpp" />
+    <ClCompile Include="Commands\Inventory\InventoryCommand.cpp" />
+    <ClCompile Include="Commands\Inventory\TakeCommand.cpp" />
     <ClCompile Include="Commands\LookCommand.cpp" />
     <ClCompile Include="Commands\MoveCommand.cpp" />
+    <ClCompile Include="Creatures\Creature.cpp" />
+    <ClCompile Include="Creatures\Npc.cpp" />
+    <ClCompile Include="Creatures\Player.cpp" />
     <ClCompile Include="Direction.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -139,10 +146,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\Command.h" />
+    <ClInclude Include="Commands\InteractCommand.h" />
+    <ClInclude Include="Commands\Inventory\DropCommand.h" />
+    <ClInclude Include="Commands\Inventory\InventoryCommand.h" />
+    <ClInclude Include="Commands\Inventory\TakeCommand.h" />
     <ClInclude Include="Commands\LookCommand.h" />
     <ClInclude Include="Commands\MoveCommand.h" />
+    <ClInclude Include="Creatures\Creature.h" />
+    <ClInclude Include="Creatures\Npc.h" />
+    <ClInclude Include="Creatures\Player.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

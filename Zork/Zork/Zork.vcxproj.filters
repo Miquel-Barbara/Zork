@@ -16,6 +16,12 @@
     <Filter Include="Archivos de origen\Commands">
       <UniqueIdentifier>{e85ee7d4-613f-4a25-b703-ccacdb284ab7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Commands\Inventory">
+      <UniqueIdentifier>{3297a338-05d6-439a-8554-feb007d44e20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Creatures">
+      <UniqueIdentifier>{b5a3a341-0cff-4023-b834-0dd64f0dc0fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +51,27 @@
     <ClCompile Include="Game.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\Inventory\DropCommand.cpp">
+      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Inventory\TakeCommand.cpp">
+      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\InteractCommand.cpp">
+      <Filter>Archivos de origen\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Creatures\Creature.cpp">
+      <Filter>Archivos de origen\Creatures</Filter>
+    </ClCompile>
+    <ClCompile Include="Creatures\Npc.cpp">
+      <Filter>Archivos de origen\Creatures</Filter>
+    </ClCompile>
+    <ClCompile Include="Creatures\Player.cpp">
+      <Filter>Archivos de origen\Creatures</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Inventory\InventoryCommand.cpp">
+      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -67,6 +94,33 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\Inventory\DropCommand.h">
+      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\Inventory\TakeCommand.h">
+      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\InteractCommand.h">
+      <Filter>Archivos de origen\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="Creatures\Creature.h">
+      <Filter>Archivos de origen\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="Creatures\Npc.h">
+      <Filter>Archivos de origen\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="Creatures\Player.h">
+      <Filter>Archivos de origen\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\Inventory\InventoryCommand.h">
+      <Filter>Archivos de origen\Commands\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

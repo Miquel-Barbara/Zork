@@ -13,7 +13,7 @@ class Command {
 public:
     virtual ~Command() {}
     virtual bool Execute(Game& game, const vector<string>& args) = 0;
-    virtual string GetName() const = 0;
+    virtual map<int, string> GetPattern() const = 0;
 };
 
 #endif

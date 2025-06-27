@@ -7,21 +7,29 @@ using namespace std;
 #include <map>
 #include <memory>
 #include "Direction.h"
+#include <vector>
+#include "Item.h"
+#include <functional>
+#include "Game.h"
+#include "Entity.h"
 
+class Game;
 
-class Room {
+struct RoomAction {
+	string verb;           
+	string target;        
+	function<void(Game&)> effect;
+	function<bool(Game&)> precondition;
+};
+
+class Room : public Entity{
 public:
 	Room(const string& name, const string& description);
 
 	void SetConnection(Direction direction, Room* room);
 	Room* GetConnectedRoom(Direction direction);
 
-	string GetName();
-	string GetDescription();
-
 private:
-	string name;
-	string description;
 	map<Direction, Room*> connections;
 };
 

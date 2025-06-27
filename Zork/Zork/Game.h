@@ -9,8 +9,11 @@ using namespace std;
 #include "Room.h"
 #include "Commands/Command.h"
 #include "World.h"
+#include "Item.h"
 
 class Command;
+class Room;
+class World;
 
 class Game {
 public:
@@ -22,10 +25,13 @@ public:
     Room* GetCurrentRoom() const;
     void SetCurrentRoom(Room* room);
 
+    vector<Item*>& GetInventory() { return inventory; }
+
 private:
-    map<string, Command*> commands;
+    vector<Command*> commands;
     World* world;
     Room* currentRoom;
+    vector<Item*> inventory;
 };
 
 #endif
