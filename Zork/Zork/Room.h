@@ -3,34 +3,30 @@
 
 using namespace std;
 
-#include <string>
-#include <map>
-#include <memory>
-#include "Direction.h"
+#include <iostream>
 #include <vector>
-#include "Item.h"
-#include <functional>
-#include "Game.h"
+#include <string>
 #include "Entity.h"
+#include "Inventory.h"
+#include "Exit.h"
+#include "Direction.h"
 
 class Game;
+class Exit;
 
-struct RoomAction {
-	string verb;           
-	string target;        
-	function<void(Game&)> effect;
-	function<bool(Game&)> precondition;
-};
-
-class Room : public Entity{
+class Room : public Entity, public Inventory<Object> {
 public:
 	Room(const string& name, const string& description);
 
-	void SetConnection(Direction direction, Room* room);
-	Room* GetConnectedRoom(Direction direction);
+	void AddExit(Exit* exit);
+	void RemoveExit(Exit* exit);
+
+	Exit* GetExit(Direction direction) const;
+
+	vector<Exit*> GetExits() const;
 
 private:
-	map<Direction, Room*> connections;
+	vector<Exit*> exits;
 };
 
 #endif

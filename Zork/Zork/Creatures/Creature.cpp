@@ -1,10 +1,13 @@
 #include "Creature.h"
 
-Creature::Creature(const std::string& name, const std::string& description) 
-	: Entity(name, description), currentRoom(nullptr) {}
+Creature::Creature(const string& name, const string& description) : Entity(name, description) {}
 
 void Creature::Move(Room* room) {
 	if (room != nullptr) {
 		currentRoom = room;
 	}
+}
+
+Room* Creature::GetCurrentRoom() {
+	return currentRoom;
 }

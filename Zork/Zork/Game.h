@@ -8,30 +8,27 @@ using namespace std;
 #include <vector>
 #include "Room.h"
 #include "Commands/Command.h"
+#include "Commands/CommandFactory.h"
 #include "World.h"
 #include "Item.h"
+#include "Creatures/Player.h"
 
-class Command;
-class Room;
 class World;
+class CommandFactory;
+class Player;
+
 
 class Game {
 public:
     Game();
 
-    void RegisterCommand(Command* command);
     void ProcessInput(const string& input);
-
-    Room* GetCurrentRoom() const;
-    void SetCurrentRoom(Room* room);
-
-    vector<Item*>& GetInventory() { return inventory; }
+    Player* GetPlayer();
 
 private:
-    vector<Command*> commands;
     World* world;
-    Room* currentRoom;
-    vector<Item*> inventory;
+    Player* player;
+    CommandFactory* commandFactory;
 };
 
 #endif

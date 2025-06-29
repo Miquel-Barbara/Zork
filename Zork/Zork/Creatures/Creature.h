@@ -1,15 +1,21 @@
-#ifndef __Creature__
-#define __Creature__
+#ifndef CREATURE_H  
+#define CREATURE_H  
 
 #include "../Entity.h"
+#include "../Item.h"
+#include "../Inventory.h"
 #include "../Room.h"
 
-class Creature : public Entity {
+class Room;
+
+class Creature : public Entity, public Inventory<Item> {
 public:
-	Creature(const std::string& name, const std::string& description);
+	Creature(const string& name, const string& description);
 	void Move(Room* room);
 
-private:
+	Room* GetCurrentRoom();
+
+protected:
 	Room* currentRoom; 
 };
 

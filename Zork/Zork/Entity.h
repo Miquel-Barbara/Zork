@@ -1,26 +1,20 @@
-#ifndef __Entity__
-#define __Entity__
+#ifndef __ENTITY_H__
+#define __ENTITY_H__
 
 using namespace std;
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 class Entity {
 public:
     Entity(const string& name, const string& description);
-    virtual ~Entity() = default;
     string GetName() const;
-    string GetDescription() const;
-
-    void AddEntity(Entity* entity);
-    void RemoveEntity(Entity* entity);
-    const vector<Entity*>& GetEntities();
-
+    virtual string GetDescription() const;
 private:
     string name;
     string description;
-    vector<Entity*> contains; 
 };
 
 #endif

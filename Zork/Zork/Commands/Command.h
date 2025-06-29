@@ -3,17 +3,32 @@
 
 using namespace std;
 
+#include <iostream>
+#include <functional>
 #include <string>
+#include <map>
 #include <vector>
 #include "../Game.h"
+
+using namespace std;
 
 class Game;
 
 class Command {
 public:
-    virtual ~Command() {}
-    virtual bool Execute(Game& game, const vector<string>& args) = 0;
-    virtual map<int, string> GetPattern() const = 0;
+    using ExecuteFunc = function<void(Game& ,const vector<string>&)>;
+
+    Command(map<int, vector<string>> pattern, ExecuteFunc func): pattern(pattern), executeFunc(func) {}
+
+    const map<int, vector<string>>& GetPattern() const { return pattern; }
+
+    void Execute(Game& game, const vector<string>& args) const {
+        executeFunc(game, args);
+    }
+
+private:
+    map<int, vector<string>> pattern;
+    ExecuteFunc executeFunc;
 };
 
 #endif

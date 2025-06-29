@@ -5,9 +5,10 @@
 
 class Npc : public Creature {
 public:
+    Npc(const string& name, const string& description);
 
 private:
 
 };
 
-#endif 
+#endif

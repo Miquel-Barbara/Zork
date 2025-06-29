@@ -16,11 +16,11 @@
     <Filter Include="Archivos de origen\Commands">
       <UniqueIdentifier>{e85ee7d4-613f-4a25-b703-ccacdb284ab7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\Commands\Inventory">
-      <UniqueIdentifier>{3297a338-05d6-439a-8554-feb007d44e20}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de origen\Creatures">
       <UniqueIdentifier>{b5a3a341-0cff-4023-b834-0dd64f0dc0fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Objects">
+      <UniqueIdentifier>{2884dad6-1b3d-408f-99a9-c918b7abfcc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,41 +36,47 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Direction.cpp">
       <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Commands\LookCommand.cpp">
-      <Filter>Archivos de origen\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Commands\MoveCommand.cpp">
-      <Filter>Archivos de origen\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\Inventory\DropCommand.cpp">
-      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    <ClCompile Include="RestrictedExit.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\Inventory\TakeCommand.cpp">
-      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    <ClCompile Include="Exit.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\InteractCommand.cpp">
-      <Filter>Archivos de origen\Commands</Filter>
+    <ClCompile Include="Item.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Creatures\Creature.cpp">
-      <Filter>Archivos de origen\Creatures</Filter>
+    <ClCompile Include="Openable.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Creatures\Npc.cpp">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\CommandFactory.cpp">
+      <Filter>Archivos de origen\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\CommandGenerator.cpp">
+      <Filter>Archivos de origen\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemContainer.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClCompile>
     <ClCompile Include="Creatures\Player.cpp">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\Inventory\InventoryCommand.cpp">
-      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    <ClCompile Include="Creatures\Creature.cpp">
+      <Filter>Archivos de origen\Creatures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,41 +92,56 @@
     <ClInclude Include="Commands\Command.h">
       <Filter>Archivos de origen\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Commands\LookCommand.h">
-      <Filter>Archivos de origen\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands\MoveCommand.h">
-      <Filter>Archivos de origen\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Archivos de origen</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Archivos de origen</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands\Inventory\DropCommand.h">
-      <Filter>Archivos de origen\Commands\Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands\Inventory\TakeCommand.h">
-      <Filter>Archivos de origen\Commands\Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands\InteractCommand.h">
-      <Filter>Archivos de origen\Commands</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
-    <ClInclude Include="Creatures\Creature.h">
-      <Filter>Archivos de origen\Creatures</Filter>
+    <ClInclude Include="RestrictedExit.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Equipment.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipmentSlot.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Openable.h">
+      <Filter>Archivos de origen</Filter>
     </ClInclude>
     <ClInclude Include="Creatures\Npc.h">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\CommandFactory.h">
+      <Filter>Archivos de origen\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\CommandGenerator.h">
+      <Filter>Archivos de origen\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemContainer.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
     <ClInclude Include="Creatures\Player.h">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClInclude>
-    <ClInclude Include="Commands\Inventory\InventoryCommand.h">
-      <Filter>Archivos de origen\Commands\Inventory</Filter>
+    <ClInclude Include="Creatures\Creature.h">
+      <Filter>Archivos de origen\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Archivos de origen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
