@@ -13,12 +13,12 @@ public:
 
     virtual void Open();
     virtual void Close();
-    virtual bool IsOpen() const;
+    virtual bool IsOpen();
 
     string GetBlockedText() const { return blockedText; }
 
 protected:
-    shared_ptr<bool> isOpen;
+    shared_ptr<bool> isOpen = make_shared<bool>(false);
     bool canOpen;
 
     string blockedText;

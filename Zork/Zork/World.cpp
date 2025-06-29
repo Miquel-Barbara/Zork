@@ -15,29 +15,28 @@ World::World() {
 	Room* kitchen = new Room("Kitchen", "You are in the kitchen of the white house.  A table seems to have been used recently for the preparation of food.  A passage leads to the west and a dark staircase can be seen leading upward.");
 	
 	//------------Exits------------//
-	Exit* exit = new Exit(Direction::South, westHouse, southHouse);
+	Exit* exit = new Exit("", "", Direction::South, westHouse, southHouse);
 	westHouse->AddExit(exit);
-	RestrictedExit* door = new RestrictedExit(Direction::East, southHouse, kitchen, "", "", "The door cannot be opened.", "That's not something you can close.", "The door is locked, and there is evidently no key.", make_shared<bool>(false), false);
+	RestrictedExit* door = new RestrictedExit("door", "", Direction::East, southHouse, kitchen, "", "", "The door cannot be opened.", "That's not something you can close.", "The door is locked, and there is evidently no key.", make_shared<bool>(false), false);
 	westHouse->AddExit(door);
 
-	Exit* exit2 = new Exit(Direction::West, southHouse, westHouse);
+	Exit* exit2 = new Exit("", "",  Direction::West, southHouse, westHouse);
 	southHouse->AddExit(exit2);
-	Exit* exit3 = new Exit(Direction::East, southHouse, behindHouse);
+	Exit* exit3 = new Exit("", "", Direction::East, southHouse, behindHouse);
 	southHouse->AddExit(exit3);
 
-	Exit* exit4 = new Exit(Direction::South, behindHouse, southHouse);
+	Exit* exit4 = new Exit("", "", Direction::South, behindHouse, southHouse);
 	behindHouse->AddExit(exit4);
 	shared_ptr<bool> isOpenWindow = make_shared<bool>(false);
-	RestrictedExit* exit5 = new RestrictedExit(Direction::West, behindHouse, kitchen, "In one corner of the house there is a small window which is open.", "In one corner of the house there is a small window which is slightly ajar.", "With great effort, you open the window far enough to allow entry.", "The window closes (more easily than it opened).", "The window is closed.", isOpenWindow);
+	RestrictedExit* exit5 = new RestrictedExit("window", "", Direction::West, behindHouse, kitchen, "In one corner of the house there is a small window which is open.", "In one corner of the house there is a small window which is slightly ajar.", "With great effort, you open the window far enough to allow entry.", "The window closes (more easily than it opened).", "The window is closed.", isOpenWindow);
 	behindHouse->AddExit(exit5);
 
-	RestrictedExit* exit6 = new RestrictedExit(Direction::East, kitchen, behindHouse, "To the east is a small window which is open.", "In one corner of the house there is a small window which is slightly ajar.", "With great effort, you open the window far enough to allow entry.", "The window closes (more easily than it opened).", "The window is closed.", isOpenWindow);
+	RestrictedExit* exit6 = new RestrictedExit("window", "", Direction::East, kitchen, behindHouse, "To the east is a small window which is open.", "In one corner of the house there is a small window which is slightly ajar.", "With great effort, you open the window far enough to allow entry.", "The window closes (more easily than it opened).", "The window is closed.", isOpenWindow);
 	kitchen->AddExit(exit6);
 
 	//------------West House Entities------------//
 	Item* leaflet = new Item("leaflet", "A leaflet with the text: 'Welcome to Zork!'");
-	Container* mailbox = new Container("mailbox", "There is a small mailbox here.");
-	mailbox->AddItem(leaflet);
+	Container* mailbox = new Container("mailbox", "There is a small mailbox here.", {leaflet});
 	westHouse->AddItem(mailbox);
 
 	Item* rubberMat = new Item("rubber mat", "A rubber mat saying 'Welcome to Zork!' lies by the door.");

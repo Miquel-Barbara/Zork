@@ -17,6 +17,8 @@ class Exit;
 class Room : public Entity, public Inventory<Object> {
 public:
 	Room(const string& name, const string& description);
+	void DescribeAll() const;
+	void DescribeObjects() const;
 
 	void AddExit(Exit* exit);
 	void RemoveExit(Exit* exit);

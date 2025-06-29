@@ -14,7 +14,7 @@ class Game;
 
 class RestrictedExit : public Exit, public Openable {
 public:
-    RestrictedExit(Direction direction, Room* source, Room* destination,
+    RestrictedExit(const string& name, const string& description, Direction direction, Room* source, Room* destination,
         const string& descriptionOpen,
         const string& descriptionClose,
         const string& openText,
@@ -23,7 +23,7 @@ public:
         shared_ptr<bool> isOpen, 
         bool canOpen = true);
 
-    string GetDescription() const;
+    string GetDescription();
 
     void MoveToDestination(Creature* creature) const override;
 

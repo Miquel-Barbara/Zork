@@ -8,7 +8,7 @@
 
 class ItemContainer : public Item, public Container {
 public:
-    ItemContainer(const string& name, const string& description);
+    ItemContainer(const string& name, const string& description, vector<Item*> initialItems);
 private:
 
 };

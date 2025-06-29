@@ -1,6 +1,6 @@
 #include "Openable.h"
 
-bool Openable::IsOpen() const {
+bool Openable::IsOpen() {
     return *isOpen;
 }
 

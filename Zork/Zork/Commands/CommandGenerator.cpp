@@ -17,8 +17,7 @@ Command* CreateMoveCommand() {
             Exit* exit = current->GetExit(dir);
 
             if (exit && exit->GetDirection() == dir) {
-                // If the exit is a RestrictedExit, check if it's open
-                game.GetPlayer()->Move(exit->GetDestinationRoom());
+                exit->MoveToDestination(game.GetPlayer());
                 return;
 
             }
@@ -115,6 +114,8 @@ Command* CreateInventoryCommand() {
     );
 }
 
+#include "../Container.h"
+
 Command* CreateLookCommand() {
     return new Command(
         { {0,  {"look"}} },
@@ -122,23 +123,7 @@ Command* CreateLookCommand() {
             Room* room = game.GetPlayer()->GetCurrentRoom();
 
             if (room) {
-                cout << room->GetName() << "\n";
-                cout << room->GetDescription() << "\n";
-
-                // Description of RestrictedExits
-                for (Exit* exit : room->GetExits()) {
-                    RestrictedExit* restExit = dynamic_cast<RestrictedExit*>(exit);
-                    if (restExit) {
-                        cout << restExit->GetDescription() << endl;
-                    }
-                }
-
-                for (Object* obj : room->GetInventory()) {
-                    Item* item = dynamic_cast<Item*>(obj);
-                    if (item) {
-                        cout << item->GetDescription() << endl;
-                    }
-                }
+                room->DescribeAll();
             }
             else {
                 cout << "You are out of the boundaries of the map. Congrats!\n";
@@ -177,17 +162,35 @@ Command* CreateOpenCommand() {
                 cout << "There is nothing to open here.\n";
 				return;
 			}
+            //Check if we open a exit in the Room
             for (Exit* exit : exits) {
-				//Check if the entity is an Exit
                 RestrictedExit* restExit = dynamic_cast<RestrictedExit*>(exit);
-                if (restExit) {
-                    if (restExit->IsOpen() == false) {
+                if (restExit && args[0] == restExit->GetName()) {
+                    if (!restExit->IsOpen()) {
                         restExit->Open();
                     }
                     else {
                         cout << "You think it isn't?\n";
                     }
                 }
+			}
+
+            //Check if we open a container in the Room
+			vector<Object*> objects = current->GetInventory();
+			for (Object* obj : objects) {
+				Container* container = dynamic_cast<Container*>(obj);
+				if (container && !container->IsOpen()  && args[0] == container->GetName()) {
+					container->Open();
+				}
+			}
+
+            //Check if we open a container in the Inventory
+            vector<Item*> inventory = game.GetPlayer()->GetInventory();
+            for (Item* item : inventory) {
+                Container* container = dynamic_cast<Container*>(item);
+				if (container && !container->IsOpen() && args[0] == container->GetName()) {
+					container->Open();
+				}
 			}
 		}
 	);
@@ -198,15 +201,14 @@ Command* CreateCloseCommand() {
 		{ {0, {"close"}} },
 		[](Game& game, const vector<string>& args) {
 			Room* current = game.GetPlayer()->GetCurrentRoom();
+
+
 			vector<Exit*> exits = current->GetExits();
-			if (exits.empty()) {
-				cout << "There is nothing to close here.\n";
-				return;
-			}
+            // Check if we close a exit in the Room
 			for (Exit* exit : exits) {
                 RestrictedExit* restExit = dynamic_cast<RestrictedExit*>(exit);
 				if (restExit) {
-					if (restExit->IsOpen() == true) {
+					if (restExit->IsOpen()) {
                         restExit->Close();
 					}
 					else {
@@ -214,6 +216,24 @@ Command* CreateCloseCommand() {
 					}
 				}
 			}
+
+            // Check if we close a container in the Room
+            vector<Object*> objects = current->GetInventory();
+            for (Object* obj : objects) {
+                Container* container = dynamic_cast<Container*>(obj);
+                if (container && container->IsOpen()) {
+					container->Close();
+				}
+            }
+
+			// Check if we close a container in the Inventory
+            vector<Item*> inventory = game.GetPlayer()->GetInventory();
+            for (Item* item : inventory) {
+                Container* container = dynamic_cast<Container*>(item);
+                if (container && container->IsOpen()) {
+                    container->Close();
+                }
+            }
 		}
 	);
 }

@@ -1,4 +1,8 @@
 #include "Room.h"
+#include "Exit.h"
+#include "RestrictedExit.h"
+#include "Object.h"
+#include "Container.h"
 
 Room::Room(const string& name, const string& description): Entity(name, description) {}
 
@@ -26,4 +30,37 @@ Exit* Room::GetExit(Direction direction) const {
 
 vector<Exit*> Room::GetExits() const {
 	return exits;
+}
+
+void Room::DescribeAll() const {
+	cout << GetName() << endl;
+	cout << GetDescription();
+
+	// Display special exits in the room
+	for (Exit* exit : GetExits()) {
+		RestrictedExit* restExit = dynamic_cast<RestrictedExit*>(exit);
+		if (restExit) {
+			cout << restExit->GetDescription();
+		}
+	}
+
+	cout << "\n";
+
+	DescribeObjects();
+}
+
+void Room::DescribeObjects() const {
+	for (Object* obj : GetInventory()) {
+		cout << obj->GetDescription() << endl;
+		Container* container = dynamic_cast<Container*>(obj);
+		if (container && container->IsOpen()) {
+			vector<Item*> items = container->GetInventory();
+			if (!items.empty()) {
+				cout << "The " << obj->GetName() << " contains:\n";
+				for (Item* item : items) {
+					cout << " " << item->GetName() << endl;
+				}
+			}
+		}
+	}
 }

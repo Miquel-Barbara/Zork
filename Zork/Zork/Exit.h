@@ -13,9 +13,9 @@ class Game;
 class Creature;
 class Room;
 
-class Exit {
+class Exit: public Entity {
 public:
-	Exit(Direction direction, Room* source, Room* destination);
+	Exit(const string& name, const string& description, Direction direction, Room* source, Room* destination);
 	virtual void MoveToDestination(Creature* creature) const;
 	Direction GetDirection() const { return direction; }
 	Room* GetSourceRoom() const { return sourceRoom; }

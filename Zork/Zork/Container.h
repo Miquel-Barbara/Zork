@@ -8,7 +8,7 @@
 
 class Container: public Object, public Inventory<Item>, public Openable {
 public:
-    Container(const std::string& name, const std::string& description);
+    Container(const string& name, const string& description, vector<Item*> initialItems);
     virtual ~Container() = default;
     bool AddItem(Item* item) override;
     bool RemoveItem(Item* item) override;

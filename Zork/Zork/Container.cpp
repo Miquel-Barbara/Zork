@@ -1,8 +1,10 @@
 #include "Container.h"
 
 
-Container::Container(const string& name, const string& description)
-	: Object(name, description) {}
+Container::Container(const string& name, const string& description, vector<Item*> initialItems)
+	: Object(name, description) {
+	inventory = initialItems;
+}
 
 bool Container::AddItem(Item* item) {
 	if (isOpen) {

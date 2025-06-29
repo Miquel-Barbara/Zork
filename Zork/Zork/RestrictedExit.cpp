@@ -1,6 +1,6 @@
 #include "RestrictedExit.h"
 
-RestrictedExit::RestrictedExit(Direction direction, Room* source, Room* destination,
+RestrictedExit::RestrictedExit(const string& name, const string& description, Direction direction, Room* source, Room* destination,
     const string& descriptionOpen,
     const string& descriptionClose,
     const string& openText,
@@ -8,7 +8,7 @@ RestrictedExit::RestrictedExit(Direction direction, Room* source, Room* destinat
     const string& blockedText,
     shared_ptr<bool> isOpen,
     bool canOpen)
-    : Exit(direction, source, destination){
+    : Exit(name, description, direction, source, destination) {
     this->descriptionOpen = descriptionOpen;
     this->descriptionClose = descriptionClose;
     this->openText = openText;
@@ -18,8 +18,8 @@ RestrictedExit::RestrictedExit(Direction direction, Room* source, Room* destinat
     this->canOpen = canOpen;
 }
 
-string RestrictedExit::GetDescription() const {
-	if(isOpen)
+string RestrictedExit::GetDescription() {
+	if(IsOpen())
 		return descriptionOpen;
 	else
 		return descriptionClose;
