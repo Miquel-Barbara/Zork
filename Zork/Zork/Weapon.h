@@ -1,0 +1,17 @@
+#ifndef __Weapon__
+#define __Weapon__
+
+#include "Objects/Equipment.h"
+
+class Weapon : public Equipment {
+public:
+    Weapon(const string& name, const string& description,
+        int durability, int attackPower, int accuracy);
+
+    int GetAttackPower() const;
+    int GetAccuracy() const;
+
+private:
+};
+
+#endif

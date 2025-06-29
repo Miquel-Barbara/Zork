@@ -3,8 +3,8 @@
 
 #include <vector>
 #include "Item.h"
-#include "Inventory.h"
-#include "Openable.h"
+#include "../Inventory.h"
+#include "../Openable.h"
 
 class Container: public Object, public Inventory<Item>, public Openable {
 public:

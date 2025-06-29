@@ -2,9 +2,9 @@
 #include "World.h"
 #include "Room.h"
 #include "Entity.h"
-#include "Item.h"
+#include "Objects/Item.h"
 #include "Exit.h"
-#include "Container.h"
+#include "Objects/Container.h"
 #include "RestrictedExit.h"
 
 World::World() {
@@ -35,7 +35,7 @@ World::World() {
 	kitchen->AddExit(exit6);
 
 	//------------West House Entities------------//
-	Item* leaflet = new Item("leaflet", "A leaflet with the text: 'Welcome to Zork!'");
+	Item* leaflet = new Item("leaflet", "A leaflet wrote with blood says: PUT THIS LEAFLET INSIDE THIS MAILBOX WAS A PAIN THAT I DIDN'T EXPECTED. You know, when you work with a mentality of OOP you struge sometimes in searching for the fititng solution, see, if the bottle of water that is in the kitchen could not be inside the mailbox it should be more easy but there is this problem that you can pickup a bottle that is a container but you can't pickup the mailbox that is also a container so how I do this?... well well great question that we have here and i can fit in this leaflet");
 	Container* mailbox = new Container("mailbox", "There is a small mailbox here.", {leaflet});
 	westHouse->AddItem(mailbox);
 

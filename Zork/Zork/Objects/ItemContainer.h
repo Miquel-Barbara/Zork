@@ -1,7 +1,7 @@
 #ifndef __ItemContainer__
 #define __ItemContainer__
 
-#include "Entity.h"
+#include "../Entity.h"
 #include "Object.h"
 #include "Item.h"
 #include "Container.h"

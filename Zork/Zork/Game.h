@@ -10,7 +10,7 @@ using namespace std;
 #include "Commands/Command.h"
 #include "Commands/CommandFactory.h"
 #include "World.h"
-#include "Item.h"
+#include "Objects/Item.h"
 #include "Creatures/Player.h"
 
 class World;

@@ -1,7 +1,7 @@
 #ifndef __Object__
 #define __Object__
 
-#include "Entity.h"
+#include "../Entity.h"
 
 class Object : public Entity {
 public:

@@ -48,9 +48,6 @@
     <ClCompile Include="Exit.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Openable.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -63,20 +60,23 @@
     <ClCompile Include="Commands\CommandGenerator.cpp">
       <Filter>Archivos de origen\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Container.cpp">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemContainer.cpp">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Creatures\Player.cpp">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClCompile>
     <ClCompile Include="Creatures\Creature.cpp">
       <Filter>Archivos de origen\Creatures</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Container.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Item.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\ItemContainer.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Object.cpp">
+      <Filter>Archivos de origen\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,18 +104,6 @@
     <ClInclude Include="Exit.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Container.h">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Equipment.h">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="EquipmentSlot.h">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Openable.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
@@ -128,12 +116,6 @@
     <ClInclude Include="Commands\CommandGenerator.h">
       <Filter>Archivos de origen\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemContainer.h">
-      <Filter>Archivos de origen\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Creatures\Player.h">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClInclude>
@@ -141,6 +123,33 @@
       <Filter>Archivos de origen\Creatures</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Container.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Equipment.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Item.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\ItemContainer.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Object.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Archivos de origen\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorPart.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
   </ItemGroup>

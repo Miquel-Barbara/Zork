@@ -11,7 +11,6 @@ bool Container::AddItem(Item* item) {
 		return Inventory<Item>::AddItem(item);
 	}
 	else {
-		cout << "The container is closed. You cannot add items." << endl;
 		return false;
 	}
 }
@@ -21,7 +20,6 @@ bool Container::RemoveItem(Item* item) {
 		return Inventory<Item>::RemoveItem(item);
 	}
 	else {
-		cout << "The container is closed. You cannot remove items." << endl;
 		return false;
 	}
 }

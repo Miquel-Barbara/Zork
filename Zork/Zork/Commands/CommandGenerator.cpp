@@ -2,6 +2,8 @@
 
 #include "../RestrictedExit.h"
 
+#include "../Objects/Container.h"
+
 
 Command* CreateMoveCommand() {
     return new Command(
@@ -39,14 +41,32 @@ Command* CreateTakeCommand() {
                 if (entity->GetName() == itemName) {
                     item = dynamic_cast<Item*>(entity);
                     if (item) {
+                        game.GetPlayer()->AddItem(item);
+                        current->RemoveItem(item);
                         break;
                     }
                 }
             }
 
+            if (!item) {
+                for (Object* entity : entities) {
+                    Container* container = dynamic_cast<Container*>(entity);
+                    if (container && container->IsOpen()) {
+                        vector<Item*> items = container->GetInventory();
+                        for (Item* it : items) {
+                            if (it->GetName() == itemName) {
+                                item = it;
+                                game.GetPlayer()->AddItem(item);
+                                container->RemoveItem(item);
+                                break;
+                            }
+                        }
+                    }
+                    if (item) break;
+                }
+            }
+
             if (item) {
-                game.GetPlayer()->AddItem(item);
-                current->RemoveItem(item);
                 cout << "Taken.\n" << endl;
             }
             else {
@@ -114,7 +134,6 @@ Command* CreateInventoryCommand() {
     );
 }
 
-#include "../Container.h"
 
 Command* CreateLookCommand() {
     return new Command(
@@ -181,6 +200,17 @@ Command* CreateOpenCommand() {
 				Container* container = dynamic_cast<Container*>(obj);
 				if (container && !container->IsOpen()  && args[0] == container->GetName()) {
 					container->Open();
+
+                    cout << "You open the " << container->GetName();
+                    if (!container->GetInventory().empty()) {
+                        cout << ", revealing a ";
+                        for (size_t i = 0; i < container->GetInventory().size(); ++i) {
+							cout << container->GetInventory()[i]->GetName();
+							if (i < container->GetInventory().size() - 1) {
+								cout << ", ";
+							}
+						}
+                    }
 				}
 			}
 
@@ -192,6 +222,8 @@ Command* CreateOpenCommand() {
 					container->Open();
 				}
 			}
+
+            cout << "\n";
 		}
 	);
 }
@@ -223,6 +255,8 @@ Command* CreateCloseCommand() {
                 Container* container = dynamic_cast<Container*>(obj);
                 if (container && container->IsOpen()) {
 					container->Close();
+
+                    cout << "You close the " << container->GetName();
 				}
             }
 
@@ -237,11 +271,6 @@ Command* CreateCloseCommand() {
 		}
 	);
 }
-
-
-
-
-
 
 vector<Command*> GenerateAllCommands() {
     return {

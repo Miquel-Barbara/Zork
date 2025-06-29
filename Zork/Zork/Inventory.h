@@ -2,7 +2,7 @@
 #define __Inventory__
 
 #include <vector>
-#include "Item.h"
+#include "Objects/Item.h"
 
 using namespace std;
 template<typename ObjectType>

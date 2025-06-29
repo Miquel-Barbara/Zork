@@ -129,24 +129,26 @@
   <ItemGroup>
     <ClCompile Include="Commands\CommandFactory.cpp" />
     <ClCompile Include="Commands\CommandGenerator.cpp" />
-    <ClCompile Include="Container.cpp" />
     <ClCompile Include="Creatures\Creature.cpp" />
     <ClCompile Include="Creatures\Npc.cpp" />
     <ClCompile Include="Creatures\Player.cpp" />
     <ClCompile Include="Direction.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exit.cpp" />
-    <ClCompile Include="ItemContainer.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Objects\Container.cpp" />
+    <ClCompile Include="Objects\Item.cpp" />
+    <ClCompile Include="Objects\ItemContainer.cpp" />
+    <ClCompile Include="Objects\Object.cpp" />
     <ClCompile Include="Openable.cpp" />
     <ClCompile Include="RestrictedExit.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Armor.h" />
+    <ClInclude Include="ArmorPart.h" />
     <ClInclude Include="Commands\Command.h" />
     <ClInclude Include="Commands\CommandFactory.h" />
     <ClInclude Include="Commands\CommandGenerator.h" />
@@ -155,18 +157,19 @@
     <ClInclude Include="Creatures\Player.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="EquipmentSlot.h" />
     <ClInclude Include="Exit.h" />
-    <ClInclude Include="Container.h" />
-    <ClInclude Include="Equipment.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="ItemContainer.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="Objects\Container.h" />
+    <ClInclude Include="Objects\Equipment.h" />
+    <ClInclude Include="Objects\Item.h" />
+    <ClInclude Include="Objects\ItemContainer.h" />
+    <ClInclude Include="Objects\Object.h" />
     <ClInclude Include="Openable.h" />
     <ClInclude Include="RestrictedExit.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Item.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="Stat.h" />
+    <ClInclude Include="Weapon.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,7 +5,7 @@ bool Openable::IsOpen() {
 }
 
 void Openable::Open() {
-    cout << openText + "\n" << endl;
+    cout << openText;
     if (!*isOpen && canOpen) {
         *isOpen = true;
     }
@@ -14,6 +14,6 @@ void Openable::Open() {
 void Openable::Close() {
     if (*isOpen) {
         *isOpen = false;
-        cout << closeText + "\n" << endl;
+        cout << closeText;
     }
 }

@@ -19,7 +19,7 @@ public:
 
 protected:
     shared_ptr<bool> isOpen = make_shared<bool>(false);
-    bool canOpen;
+    bool canOpen = true;
 
     string blockedText;
     string descriptionOpen;

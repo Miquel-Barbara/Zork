@@ -1,8 +1,8 @@
 #include "Room.h"
 #include "Exit.h"
 #include "RestrictedExit.h"
-#include "Object.h"
-#include "Container.h"
+#include "Objects/Object.h"
+#include "Objects/Container.h"
 
 Room::Room(const string& name, const string& description): Entity(name, description) {}
 
@@ -58,7 +58,7 @@ void Room::DescribeObjects() const {
 			if (!items.empty()) {
 				cout << "The " << obj->GetName() << " contains:\n";
 				for (Item* item : items) {
-					cout << " " << item->GetName() << endl;
+					cout << "A " << item->GetName() << endl;
 				}
 			}
 		}
