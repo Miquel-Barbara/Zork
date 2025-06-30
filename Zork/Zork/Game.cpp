@@ -3,7 +3,7 @@
 Game::Game() {
     commandFactory = new CommandFactory();
     
-    player = new Player("Player", "You are the main character of the game.");
+    player = new Player("Player", "You are the main character of the game.", {});
 
     world = new World();
     player->Move(world->GetStartRoom());

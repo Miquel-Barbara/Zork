@@ -5,7 +5,7 @@
 
 class Npc : public Creature {
 public:
-    Npc(const string& name, const string& description);
+    Npc(const string& name, const string& description, map<StatType, StatValue> stats);
 
 private:
 

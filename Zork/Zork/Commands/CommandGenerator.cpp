@@ -1,19 +1,25 @@
 #include "CommandGenerator.h"
-
 #include "../RestrictedExit.h"
-
 #include "../Objects/Container.h"
 
+namespace {
+    template<typename T, typename Y>
+    Y* FindInList(vector<T*> list, string name) {
+        for (T* item : list) {
+            Y* castedItem = dynamic_cast<Y*>(item);
+            if (castedItem && castedItem->GetName() == name) {
+                return castedItem;
+            }
+        }
+        return nullptr;
+    }
+}
 
 Command* CreateMoveCommand() {
     return new Command(
         { {0, {"go"}} },
         [](Game& game, const vector<string>& args) {
-            if (args.size() < 1) {
-				cout << "You'll have to say which compass direction to go in.\n";
-				return;return;
-            }
-                
+  
             Direction dir = StringToDirection(args[0]);
             Room* current = game.GetPlayer()->GetCurrentRoom();
             Exit* exit = current->GetExit(dir);
@@ -23,6 +29,7 @@ Command* CreateMoveCommand() {
                 return;
 
             }
+
             cout << "You can't go that way.\n";
         }
     );
@@ -36,33 +43,20 @@ Command* CreateTakeCommand() {
             Room* current = game.GetPlayer()->GetCurrentRoom();
             vector<Object*> entities = current->GetInventory();
 
-            Item* item = nullptr;
-            for (Object* entity : entities) {
-                if (entity->GetName() == itemName) {
-                    item = dynamic_cast<Item*>(entity);
+            Item* item = FindInList<Object, Item>(entities, itemName);
+            if (item) {
+				game.GetPlayer()->AddItem(item);
+				current->RemoveItem(item);
+				return;
+            }
+            else {
+                Container* container = FindInList<Object, Container>(entities, itemName);
+                if (container && container->IsOpen()) {
+                    Item* item = FindInList<Item, Item>(container->GetInventory(), itemName);
                     if (item) {
                         game.GetPlayer()->AddItem(item);
-                        current->RemoveItem(item);
-                        break;
+                        container->RemoveItem(item);
                     }
-                }
-            }
-
-            if (!item) {
-                for (Object* entity : entities) {
-                    Container* container = dynamic_cast<Container*>(entity);
-                    if (container && container->IsOpen()) {
-                        vector<Item*> items = container->GetInventory();
-                        for (Item* it : items) {
-                            if (it->GetName() == itemName) {
-                                item = it;
-                                game.GetPlayer()->AddItem(item);
-                                container->RemoveItem(item);
-                                break;
-                            }
-                        }
-                    }
-                    if (item) break;
                 }
             }
 
@@ -161,71 +155,100 @@ Command* CreateDisplayCommand(vector<string> keyword, string message) {
 	);
 }
 
-Command* CreateDisplayCommand(string keyword, string message) {
-    return new Command(
-        { {0, {keyword}} },
-        [message](Game& game, const vector<string>& args) {
-            cout << message << endl;
-        }
-    );
-}
-
-
 Command* CreateOpenCommand() {
 	return new Command(
 		{ {0, {"open"}} },
 		[](Game& game, const vector<string>& args) {
 			Room* current = game.GetPlayer()->GetCurrentRoom();
-            vector<Exit*> exits = current->GetExits();
-            if (exits.empty()) {
-                cout << "There is nothing to open here.\n";
-				return;
+
+            RestrictedExit* restExit = FindInList<Exit, RestrictedExit>(current->GetExits(), args[0]);
+            if (restExit && !restExit->IsOpen()) {
+                restExit->Open();
 			}
-            //Check if we open a exit in the Room
-            for (Exit* exit : exits) {
-                RestrictedExit* restExit = dynamic_cast<RestrictedExit*>(exit);
-                if (restExit && args[0] == restExit->GetName()) {
-                    if (!restExit->IsOpen()) {
-                        restExit->Open();
-                    }
-                    else {
-                        cout << "You think it isn't?\n";
+
+            Container* container = FindInList<Object, Container>(current->GetInventory(), args[0]);
+            if (container && !container->IsOpen()) {
+                container->Open();
+
+                cout << "You open the " << container->GetName();
+                if (!container->GetInventory().empty()) {
+                    cout << ", revealing a ";
+                    for (size_t i = 0; i < container->GetInventory().size(); ++i) {
+                        cout << container->GetInventory()[i]->GetName();
+                        if (i < container->GetInventory().size() - 1) {
+                            cout << ", ";
+                        }
                     }
                 }
-			}
+            }
 
-            //Check if we open a container in the Room
-			vector<Object*> objects = current->GetInventory();
-			for (Object* obj : objects) {
-				Container* container = dynamic_cast<Container*>(obj);
-				if (container && !container->IsOpen()  && args[0] == container->GetName()) {
-					container->Open();
-
-                    cout << "You open the " << container->GetName();
-                    if (!container->GetInventory().empty()) {
-                        cout << ", revealing a ";
-                        for (size_t i = 0; i < container->GetInventory().size(); ++i) {
-							cout << container->GetInventory()[i]->GetName();
-							if (i < container->GetInventory().size() - 1) {
-								cout << ", ";
-							}
-						}
-                    }
-				}
-			}
-
-            //Check if we open a container in the Inventory
-            vector<Item*> inventory = game.GetPlayer()->GetInventory();
-            for (Item* item : inventory) {
-                Container* container = dynamic_cast<Container*>(item);
-				if (container && !container->IsOpen() && args[0] == container->GetName()) {
-					container->Open();
-				}
-			}
+            Container* inventoryContainer = FindInList<Item, Container>(game.GetPlayer()->GetInventory(), args[0]);
+            if (container && !container->IsOpen()) {
+                container->Open();
+            }
 
             cout << "\n";
 		}
 	);
+}
+
+Command* CreateEquipCommand() {
+    return new Command(
+        { {0, {"equip"}} },
+        [](Game& game, const vector<string>& args) {
+            Equipment* itemToEquip = FindInList<Item, Equipment>(game.GetPlayer()->GetInventory(), args[0]);
+
+            if (itemToEquip) {
+                game.GetPlayer()->Equip(itemToEquip);
+                cout << "You equip the " << itemToEquip->GetName() << ".\n";
+            }
+            else {
+                cout << "You don't have that item in your inventory.\n";
+            }
+        }
+    );
+}
+
+Command* CreateUnequipCommand() {
+    return new Command(
+        { {0, {"unequip"}} },
+        [](Game& game, const vector<string>& args) {
+            Equipment* itemToUnequip = FindInList<Item, Equipment>(game.GetPlayer()->GetInventory(), args[0]);
+
+            if (itemToUnequip) {
+                game.GetPlayer()->Unequip(itemToUnequip);
+                cout << "You unequip the " << itemToUnequip->GetName() << ".\n";
+            }
+            else {
+                cout << "You don't have that item in your inventory.\n";
+            }
+        }
+    );
+}
+
+Command* CreateLookEquipment() {
+    return new Command(
+        { {0, {"equipment"}} },
+        [](Game& game, const vector<string>& args) {
+            Player* player = game.GetPlayer();
+            Weapon* weapon = player->GetEquippedWeapon();
+
+            cout << "You are currently wielding: " << (weapon ? weapon->GetName() : "nothing") << endl;
+            cout << "You are currently wearing: " << endl;
+
+            Equipment* helmet = player->GetEquippedArmor(ArmorPart::Head);
+            Equipment* chest = player->GetEquippedArmor(ArmorPart::Chest);
+            Equipment* legs = player->GetEquippedArmor(ArmorPart::Legs);
+            Equipment* arms = player->GetEquippedArmor(ArmorPart::Arms);
+            Equipment* boots = player->GetEquippedArmor(ArmorPart::Feet);
+
+            cout << "- Helmet: " << (helmet ? helmet->GetName() : "nothing") << endl;
+            cout << "- Chest: " << (chest ? chest->GetName() : "nothing") << endl;
+            cout << "- Legs: " << (legs ? legs->GetName() : "nothing") << endl;
+            cout << "- Arms: " << (arms ? arms->GetName() : "nothing") << endl;
+            cout << "- Boots: " << (boots ? boots->GetName() : "nothing") << endl;
+        }
+    );
 }
 
 Command* CreateCloseCommand() {
@@ -234,43 +257,36 @@ Command* CreateCloseCommand() {
 		[](Game& game, const vector<string>& args) {
 			Room* current = game.GetPlayer()->GetCurrentRoom();
 
-
-			vector<Exit*> exits = current->GetExits();
-            // Check if we close a exit in the Room
-			for (Exit* exit : exits) {
-                RestrictedExit* restExit = dynamic_cast<RestrictedExit*>(exit);
-				if (restExit) {
-					if (restExit->IsOpen()) {
-                        restExit->Close();
-					}
-					else {
-						cout << "I think you've already done that.\n";
-					}
-				}
-			}
-
-            // Check if we close a container in the Room
-            vector<Object*> objects = current->GetInventory();
-            for (Object* obj : objects) {
-                Container* container = dynamic_cast<Container*>(obj);
-                if (container && container->IsOpen()) {
-					container->Close();
-
-                    cout << "You close the " << container->GetName();
-				}
+            RestrictedExit* restExit = FindInList<Exit, RestrictedExit>(current->GetExits(), args[0]);
+            if (restExit && restExit->IsOpen()) {
+                restExit->Close();
             }
 
-			// Check if we close a container in the Inventory
-            vector<Item*> inventory = game.GetPlayer()->GetInventory();
-            for (Item* item : inventory) {
-                Container* container = dynamic_cast<Container*>(item);
-                if (container && container->IsOpen()) {
-                    container->Close();
-                }
+            Container* container = FindInList<Object, Container>(current->GetInventory(), args[0]);
+            if (container && container->IsOpen()) {
+				container->Close();
+				cout << "You close the " << container->GetName();
+				return;
+			}
+
+            Container* inventoryContainer = FindInList<Item, Container>(game.GetPlayer()->GetInventory(), args[0]);
+            if (container && container->IsOpen()) {
+                container->Close();
             }
 		}
 	);
 }
+
+Command* CreateQuitCommand() {
+    return new Command(
+        { {0, {"quit", "exit"}} },
+        [](Game& game, const vector<string>& args) {
+            cout << "Thanks for playing! Goodbye!\n";
+        }
+    );
+}
+
+
 
 vector<Command*> GenerateAllCommands() {
     return {
@@ -281,11 +297,15 @@ vector<Command*> GenerateAllCommands() {
         CreateInventoryCommand(),
         CreateOpenCommand(),
         CreateCloseCommand(),
-        CreateDisplayCommand("help", "Available commands: look, go, take, drop, inventory, help"),
-        CreateDisplayCommand("bar", "Bar bar"),
-        CreateDisplayCommand("Zork", "At your service"),
-        CreateDisplayCommand("jump", "Are you proud of yourself?"),
+        CreateEquipCommand(),
+        CreateUnequipCommand(),
+        CreateQuitCommand(),
+        CreateLookEquipment(),
+        CreateDisplayCommand({"help"}, "Available commands: look, go, take, drop, inventory, help"),
+        CreateDisplayCommand({"bar"}, "Bar bar"),
+        CreateDisplayCommand({"Zork"}, "At your service"),
+        CreateDisplayCommand({"jump"}, "Are you proud of yourself?"),
         CreateDisplayCommand({"shout", "yell" , "scream"}, "Aaaarrrrgggghhhh!"),
-        CreateDisplayCommand("hello", "Hello"),
+        CreateDisplayCommand({"hello"}, "Hello"),
     };
 }

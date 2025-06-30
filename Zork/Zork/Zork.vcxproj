@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Commands\CommandFactory.cpp" />
     <ClCompile Include="Commands\CommandGenerator.cpp" />
     <ClCompile Include="Creatures\Creature.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Creatures\Player.cpp" />
     <ClCompile Include="Direction.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Objects\Container.cpp" />
     <ClCompile Include="Objects\Item.cpp" />
@@ -144,6 +146,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Stat.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>

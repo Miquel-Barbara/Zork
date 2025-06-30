@@ -10,6 +10,8 @@ enum class Direction {
     South,
     East,
     West,
+    Up,
+    Down,
     Invalid
 };
 

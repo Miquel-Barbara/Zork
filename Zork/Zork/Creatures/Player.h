@@ -5,7 +5,7 @@
 
 class Player : public Creature {
 public:
-	Player(const string& name, const string& description);
+	Player(const string& name, const string& description, map<StatType, StatValue> stats);
 private:
 
 };

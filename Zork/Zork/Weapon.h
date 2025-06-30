@@ -5,12 +5,7 @@
 
 class Weapon : public Equipment {
 public:
-    Weapon(const string& name, const string& description,
-        int durability, int attackPower, int accuracy);
-
-    int GetAttackPower() const;
-    int GetAccuracy() const;
-
+    Weapon(const string& name, const string& description,int durability, int attackPower, int accuracy);
 private:
 };
 

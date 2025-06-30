@@ -5,6 +5,8 @@ Direction StringToDirection(const string& input) {
     if (input == "south") return Direction::South;
     if (input == "east")  return Direction::East;
     if (input == "west")  return Direction::West;
+    if (input == "up")    return Direction::Up;
+    if (input == "down")  return Direction::Down;
     return Direction::Invalid;
 }
 
@@ -14,6 +16,8 @@ string DirectionToString(Direction dir) {
     case Direction::South: return "south";
     case Direction::East:  return "east";
     case Direction::West:  return "west";
+    case Direction::Up:    return "up";
+    case Direction::Down:  return "down";
     default: return "invalid";
     }
 }

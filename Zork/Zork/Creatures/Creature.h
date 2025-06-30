@@ -7,23 +7,23 @@
 #include "../Room.h"
 #include <map>
 #include "../Armor.h"
+#include "../ArmorPart.h"
 #include "../Weapon.h"
 
+#include "../Stat.h"
 #include "../Stat.h"
 
 class Room;
 
 class Creature : public Entity, public Inventory<Item> {
 public:
-	Creature(const string& name, const string& description);
+	Creature(const string& name, const string& description, map<StatType, StatValue> stats);
+
 	void Move(Room* room);
 	Room* GetCurrentRoom();
 
-	bool EquipWeapon(Weapon* weapon);
-	bool EquipArmor(ArmorPart slot, Armor* armor);
-
-	bool UnequipWeapon();
-	bool UnequipArmor(ArmorPart slot);
+	bool Equip(Equipment* equipment);
+	bool Unequip(Equipment* equipment);
 
 	Weapon* GetEquippedWeapon() const;
 	Equipment* GetEquippedArmor(ArmorPart slot) const;
