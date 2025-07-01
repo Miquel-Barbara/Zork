@@ -34,3 +34,7 @@ void Game::ProcessInput(const string& input) {
         cout << "That's not a verb I recognise.\n";
     }
 }
+
+bool Game::EndGame() const {
+	return quit;
+}

@@ -316,6 +316,7 @@ Command* CreateQuitCommand() {
     return new Command(
         { {0, {"quit", "exit"}} },
         [](Game& game, const vector<string>& args) {
+            game.Quit();
             cout << "Thanks for playing! Goodbye!\n";
         }
     );

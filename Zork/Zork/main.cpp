@@ -13,7 +13,7 @@ int main() {
 
     Game game;
 
-    while (true) {
+    while (!game.EndGame()) {
         cout << "\n>";
         getline(cin, input);
 

@@ -24,11 +24,14 @@ public:
 
     void ProcessInput(const string& input);
     Player* GetPlayer();
+    void Quit() { quit = true; }
+    bool EndGame() const;
 
 private:
     World* world;
     Player* player;
     CommandFactory* commandFactory;
+    bool quit;
 };
 
 #endif
