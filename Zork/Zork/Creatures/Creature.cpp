@@ -1,6 +1,6 @@
 #include "Creature.h"
 
-Creature::Creature(const string& name, const string& description, map<StatType, StatValue> stats) : Entity(name, description), stats(stats)  {}
+Creature::Creature(const string& name, const string& description, map<StatType, StatValue*> stats) : Entity(name, description), stats(stats)  {}
 
 void Creature::Move(Room* room) {
 	if (room != nullptr) {
@@ -80,10 +80,26 @@ Equipment* Creature::GetEquippedArmor(ArmorPart slot) const {
 	return nullptr;
 }
 
-StatValue Creature::GetStat(StatType stat) const {
+int Creature::GetStat(StatType stat) const {
 	auto it = stats.find(stat);
+	int equipmentValue = 0;
+
+	for (Equipment* equipment : GetAllEquipment()) {
+		if (equipment) {
+			equipmentValue += equipment->GetStat(stat);
+		}
+	}
+
 	if (it != stats.end()) {
-		return it->second;
+		return it->second->Get() + equipmentValue;
 	}
 	return 0;
+}
+
+vector<StatType> Creature::GetAllStats() const {
+	vector<StatType> statTypes;
+	for (const auto& pair : stats) {
+		statTypes.push_back(pair.first);
+	}
+	return statTypes;
 }

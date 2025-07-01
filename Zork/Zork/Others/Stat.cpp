@@ -1,5 +1,7 @@
 #include "Stat.h"
 
+
+
 StatValue::StatValue(int base, int min, int max) {
 	value = base;
 	minValue = min;

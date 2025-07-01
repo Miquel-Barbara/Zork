@@ -1,16 +1,7 @@
 #ifndef __Stat__
 #define __Stat__
 
-enum StatType {
-    Durability,
-    Strength,
-    Defense,
-    Evasion,
-    AttackPower,
-    Accuracy,
-    Speed,
-    Hp
-};
+#include <string>
 
 class StatValue {
 public:

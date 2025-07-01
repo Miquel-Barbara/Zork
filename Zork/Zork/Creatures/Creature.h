@@ -11,12 +11,13 @@
 #include "../Objects/Weapon.h"
 
 #include "../Others/Stat.h"
+#include "../Enums/StatType.h"
 
 class Room;
 
 class Creature : public Entity, public Inventory<Item> {
 public:
-	Creature(const string& name, const string& description, map<StatType, StatValue> stats);
+	Creature(const string& name, const string& description, map<StatType, StatValue*> stats);
 
 	void Move(Room* room);
 	Room* GetCurrentRoom();
@@ -28,7 +29,8 @@ public:
 	Equipment* GetEquippedArmor(ArmorPart slot) const;
 	vector<Equipment*> GetAllEquipment() const;
 
-	StatValue GetStat(StatType stat) const;
+	int GetStat(StatType stat) const;
+	vector<StatType> GetAllStats() const;
 
 protected:
 	Room* currentRoom; 
@@ -36,7 +38,7 @@ protected:
 	Weapon* weapon;
 	map<ArmorPart, Equipment*> equipment;
 
-	map<StatType, StatValue> stats;
+	map<StatType, StatValue*> stats;
 };
 
 #endif 

@@ -134,6 +134,7 @@
     <ClCompile Include="Creatures\Player.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Enums\Direction.cpp" />
+    <ClCompile Include="Enums\StatType.cpp" />
     <ClCompile Include="Objects\Armor.cpp" />
     <ClCompile Include="Objects\Container.cpp" />
     <ClCompile Include="Objects\Equipment.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Enums\ArmorPart.h" />
     <ClInclude Include="Enums\Direction.h" />
+    <ClInclude Include="Enums\StatType.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Objects\Armor.h" />
     <ClInclude Include="Objects\Container.h" />
