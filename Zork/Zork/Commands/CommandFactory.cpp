@@ -1,14 +1,24 @@
 #include "CommandFactory.h"
 #include <sstream>
 #include <algorithm>
+#include <cctype>
 #include "CommandGenerator.h"
 
 CommandFactory::CommandFactory() {
     commands = GenerateAllCommands();
 }
 
+string toLower(const string& input) {
+    string result = input;
+    transform(result.begin(), result.end(), result.begin(),
+        [](unsigned char c) { return std::tolower(c); });
+    return result;
+}
+
 Command* CommandFactory::DetectCommand(const string& input, vector<string>& finalArgs) {
-    vector<string> args = SplitInput(input);
+
+    string inputLowerCase = toLower(input);
+    vector<string> args = SplitInput(inputLowerCase);
 
     if (args.empty()) {
         return nullptr;

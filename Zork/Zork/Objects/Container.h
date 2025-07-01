@@ -4,9 +4,9 @@
 #include <vector>
 #include "Item.h"
 #include "../Inventory.h"
-#include "../Openable.h"
+#include "../Others/Openable.h"
 
-class Container: public Object, public Inventory<Item>, public Openable {
+class Container: public virtual Object, public Inventory<Item>, public Openable {
 public:
     Container(const string& name, const string& description, vector<Item*> initialItems);
     virtual ~Container() = default;

@@ -1,14 +1,15 @@
 #include <iostream>
 #include "World.h"
 #include "Room.h"
-#include "Entity.h"
-#include "Objects/Item.h"
+#include "../Entity.h"
+#include "../Objects/Item.h"
 #include "Exit.h"
-#include "Objects/Container.h"
-#include "Objects/ItemContainer.h"
-#include "Weapon.h"
-#include "Armor.h"
+#include "../Objects/Container.h"
+#include "../Objects/ItemContainer.h"
+#include "../Objects/Weapon.h"
+#include "../Objects/Armor.h"
 #include "RestrictedExit.h"
+#include "../Enums/Direction.h"
 
 World::World() {	
 	CreateAllRooms();
@@ -27,6 +28,7 @@ void World::CreateAllRooms() {
 	westHouse = new Room("West of House", "You are standing in an open field west of a white house, with a boarded front door.");
 	southHouse = new Room("South of House", "You are facing the south side of a white house. There is no door here, and all the windows are boarded.");
 	behindHouse = new Room("Behind of House", "You are behind the white house.");
+	northHouse = new Room("North of House", "You are facing the north side of a white house.  There is no door here, and all the windows are barred.");
 
 	//----Inside House----//
 	kitchen = new Room("Kitchen", "You are in the kitchen of the white house.  A table seems to have been used recently for the preparation of food.  A passage leads to the west and a dark staircase can be seen leading upward.");
@@ -38,7 +40,7 @@ void World::CreateAllRooms() {
 	forest2 = new Room("Forest", "This is a dimly lit forest, with large trees all around.  To the east, there appears to be sunlight.");
 	
 	//----Forest2----//
-	forestPath = new Room("Forest", "This is a dimly lit forest, with large trees all around.  One particularly large tree with some low branches stands here.");
+	forestPath = new Room("Forest", "This is a dimly lit forest, with large trees all around.  One particularly large tree with some low branches stands here. There is a corpse near the tree where the upper half of the body is missing, despite all it is still wearing pants and boots");
 	upATree = new Room("Up a Tree",  "You are about 10 feet above the ground nestled among some large branches.  The nearest branch above you is above your reach.On the branch is a small birds nest. In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged somewhere by a childless songbird.  The egg is covered with fine gold inlay, and ornamented in lapis lazuli and mother-of-pearl.  Unlike most eggs, this one is hinged and has a delicate looking clasp holding it closed.  The egg appears extremely fragile.");
 	clearing = new Room("Clearing", "You are in a clearing, with a forest surrounding you on the west and south. There is a pile of leaves on the ground.");
 
@@ -56,6 +58,7 @@ void World::CreateAllConnections() {
 	westHouse->AddExit(new Exit("", "", Direction::South, westHouse, southHouse));
 	westHouse->AddExit(new Exit("", "", Direction::West, westHouse, forest1));
 	westHouse->AddExit(new RestrictedExit("door", "", Direction::East, southHouse, kitchen, "", "", "The door cannot be opened.", "That's not something you can close.", "The door is locked, and there is evidently no key.", make_shared<bool>(false), false));
+	westHouse->AddExit(new Exit("", "", Direction::North, westHouse, northHouse));
 
 	//----South House----//
 	southHouse->AddExit(new Exit("", "", Direction::West, southHouse, westHouse));
@@ -67,6 +70,11 @@ void World::CreateAllConnections() {
 	behindHouse->AddExit(new Exit("", "", Direction::East, behindHouse, clearing));
 	shared_ptr<bool> isOpenWindow = make_shared<bool>(false);
 	behindHouse->AddExit(new RestrictedExit("window", "", Direction::West, behindHouse, kitchen, "In one corner of the house there is a small window which is open.", "In one corner of the house there is a small window which is slightly ajar.", "With great effort, you open the window far enough to allow entry.", "The window closes (more easily than it opened).", "The window is closed.", isOpenWindow));
+	behindHouse->AddExit(new Exit("", "", Direction::West, behindHouse, northHouse));
+	
+	//----North House----//
+	northHouse->AddExit(new Exit("", "", Direction::East, northHouse, behindHouse));
+	northHouse->AddExit(new Exit("", "", Direction::West, northHouse, westHouse));
 
 	//----Kitchen House----//
 	kitchen->AddExit(new RestrictedExit("window", "", Direction::East, kitchen, behindHouse, "To the east is a small window which is open.", "In one corner of the house there is a small window which is slightly ajar.", "With great effort, you open the window far enough to allow entry.", "The window closes (more easily than it opened).", "The window is closed.", isOpenWindow));
@@ -124,10 +132,17 @@ void World::CreateAllItems() {
 	Item* rubberMat = new Item("rubber mat", "A rubber mat saying 'Welcome to Zork!' lies by the door.");
 	westHouse->AddItem(rubberMat);
 
+	//------------North House------------//
+	Armor* chest = new Armor("coat", "A coat lying on the ground appears to be in poor condition.", 20, 10, 5, 30, 0, ArmorPart::Chest);
+	northHouse->AddItem(chest);
+
+
 	//------------Kitchen------------//
 	ItemContainer* bottle = new ItemContainer("bottle water", "A bottle is sitting on the table.", { new Item("water", "A bottle of water.") });
+	kitchen->AddItem(bottle);
 	ItemContainer* brownSack = new ItemContainer("brown sack", "On the table is an elongated brown sack, smelling of hot peppers.", {new Item("lunch", "I am so hungry..."), new Item("garlic", "Eww")});
-
+	kitchen->AddItem(brownSack);
+	
 	//------------Living------------//
 	Container* trophyCase = new Container("trophy case", "A trophy case is in the corner of the room.", {});
 	livingRoom->AddItem(trophyCase);
@@ -144,4 +159,17 @@ void World::CreateAllItems() {
 	attic->AddItem(rope);
 	Weapon* knife = new Weapon("knife", "A large kitchen knife is lying on the floor.", 50, 5, 70);
 	attic->AddItem(knife);
+
+	//------------Forest Path------------//
+	Armor* boots = new Armor("boots", "", 50, 10, 10, 0, 20, ArmorPart::Feet);
+	forestPath->AddItem(boots);
+	Armor* legs = new Armor("pants", "", 60, 30, 0, 10, 0, ArmorPart::Legs);
+	forestPath->AddItem(legs);
+
+	//------------Gallery------------//
+	Armor* arms = new Armor("gloves", "Gloves full of paint. Surely the bandits didn't find any value in them", 50, 10, 10, 0, 20, ArmorPart::Feet);
+	gallery->AddItem(arms);
+
+	Armor* chest2 = new Armor("armor", "A dented armor on the right side, it's as if a large object had hit it. With a little effort it will fit.", 40, 50, 10, 60, 0, ArmorPart::Feet);
+	cellar->AddItem(chest2);
 }

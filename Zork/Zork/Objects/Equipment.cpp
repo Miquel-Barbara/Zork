@@ -1,6 +1,6 @@
-#include "Objects/Equipment.h"
+#include "Equipment.h"
 
 Equipment::Equipment(const string& name, const string& description, int durability)
-	: Item(name, description) {
+	: Item(name, description), Object(name, description) {
 	stats[StatType::Durability] = durability;
 }

@@ -4,14 +4,13 @@
 #include "../Entity.h"
 #include "../Objects/Item.h"
 #include "../Inventory.h"
-#include "../Room.h"
+#include "../World/Room.h"
 #include <map>
-#include "../Armor.h"
-#include "../ArmorPart.h"
-#include "../Weapon.h"
+#include "../Objects/Armor.h"
+#include "../Enums/ArmorPart.h"
+#include "../Objects/Weapon.h"
 
-#include "../Stat.h"
-#include "../Stat.h"
+#include "../Others/Stat.h"
 
 class Room;
 
@@ -27,6 +26,7 @@ public:
 
 	Weapon* GetEquippedWeapon() const;
 	Equipment* GetEquippedArmor(ArmorPart slot) const;
+	vector<Equipment*> GetAllEquipment() const;
 
 	StatValue GetStat(StatType stat) const;
 

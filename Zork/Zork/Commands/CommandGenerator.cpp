@@ -1,5 +1,5 @@
 #include "CommandGenerator.h"
-#include "../RestrictedExit.h"
+#include "../World/RestrictedExit.h"
 #include "../Objects/Container.h"
 
 namespace {
@@ -213,7 +213,7 @@ Command* CreateUnequipCommand() {
     return new Command(
         { {0, {"unequip"}} },
         [](Game& game, const vector<string>& args) {
-            Equipment* itemToUnequip = FindInList<Item, Equipment>(game.GetPlayer()->GetInventory(), args[0]);
+            Equipment* itemToUnequip = FindInList<Equipment, Equipment>(game.GetPlayer()->GetAllEquipment(), args[0]);
 
             if (itemToUnequip) {
                 game.GetPlayer()->Unequip(itemToUnequip);

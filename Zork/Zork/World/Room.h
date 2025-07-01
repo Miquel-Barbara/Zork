@@ -6,10 +6,10 @@ using namespace std;
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Entity.h"
-#include "Inventory.h"
+#include "../Entity.h"
+#include "../Inventory.h"
 #include "Exit.h"
-#include "Direction.h"
+#include "../Enums/Direction.h"
 
 class Game;
 class Exit;

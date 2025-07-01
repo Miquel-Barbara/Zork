@@ -1,8 +1,8 @@
 #ifndef __Armor__
 #define __Armor__
 
-#include "Objects/Equipment.h"
-#include "ArmorPart.h"
+#include "Equipment.h"
+#include "../Enums/ArmorPart.h"
 #include <map>
 
 using namespace std;

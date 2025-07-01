@@ -54,6 +54,18 @@ bool Creature::Unequip(Equipment* unequip) {
 			return true;
 		}
 	}
+	return false;
+}
+
+vector<Equipment*> Creature::GetAllEquipment() const {
+	vector<Equipment*> allEquipment;
+	for (const auto& pair : equipment) {
+		allEquipment.push_back(pair.second);
+	}
+	if (weapon) {
+		allEquipment.push_back(weapon);
+	}
+	return allEquipment;
 }
 
 Weapon* Creature::GetEquippedWeapon() const {

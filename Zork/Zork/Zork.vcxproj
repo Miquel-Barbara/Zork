@@ -127,54 +127,54 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Commands\CommandFactory.cpp" />
     <ClCompile Include="Commands\CommandGenerator.cpp" />
     <ClCompile Include="Creatures\Creature.cpp" />
     <ClCompile Include="Creatures\Npc.cpp" />
     <ClCompile Include="Creatures\Player.cpp" />
-    <ClCompile Include="Direction.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Equipment.cpp" />
-    <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="Enums\Direction.cpp" />
+    <ClCompile Include="Objects\Armor.cpp" />
     <ClCompile Include="Objects\Container.cpp" />
+    <ClCompile Include="Objects\Equipment.cpp" />
     <ClCompile Include="Objects\Item.cpp" />
     <ClCompile Include="Objects\ItemContainer.cpp" />
     <ClCompile Include="Objects\Object.cpp" />
-    <ClCompile Include="Openable.cpp" />
-    <ClCompile Include="RestrictedExit.cpp" />
+    <ClCompile Include="Objects\Weapon.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Stat.cpp" />
-    <ClCompile Include="Weapon.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="Others\Openable.cpp" />
+    <ClCompile Include="Others\Stat.cpp" />
+    <ClCompile Include="World\Exit.cpp" />
+    <ClCompile Include="World\RestrictedExit.cpp" />
+    <ClCompile Include="World\Room.cpp" />
+    <ClCompile Include="World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Armor.h" />
-    <ClInclude Include="ArmorPart.h" />
     <ClInclude Include="Commands\Command.h" />
     <ClInclude Include="Commands\CommandFactory.h" />
     <ClInclude Include="Commands\CommandGenerator.h" />
     <ClInclude Include="Creatures\Creature.h" />
     <ClInclude Include="Creatures\Npc.h" />
     <ClInclude Include="Creatures\Player.h" />
-    <ClInclude Include="Direction.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Exit.h" />
+    <ClInclude Include="Enums\ArmorPart.h" />
+    <ClInclude Include="Enums\Direction.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Objects\Armor.h" />
     <ClInclude Include="Objects\Container.h" />
     <ClInclude Include="Objects\Equipment.h" />
     <ClInclude Include="Objects\Item.h" />
     <ClInclude Include="Objects\ItemContainer.h" />
     <ClInclude Include="Objects\Object.h" />
-    <ClInclude Include="Openable.h" />
-    <ClInclude Include="RestrictedExit.h" />
+    <ClInclude Include="Objects\Weapon.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Room.h" />
-    <ClInclude Include="Stat.h" />
-    <ClInclude Include="Weapon.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="Others\Openable.h" />
+    <ClInclude Include="Others\Stat.h" />
+    <ClInclude Include="World\Exit.h" />
+    <ClInclude Include="World\RestrictedExit.h" />
+    <ClInclude Include="World\Room.h" />
+    <ClInclude Include="World\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,7 @@
 #define __PLAYER_H__
 
 #include "Creature.h"
+#include "../Others/Stat.h"
 
 class Player : public Creature {
 public:

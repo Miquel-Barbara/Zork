@@ -4,10 +4,10 @@
 using namespace std;
 
 #include <string>
-#include "Entity.h"
-#include "Direction.h"
+#include "../Entity.h"
+#include "../Enums/Direction.h"
 #include "Room.h"
-#include "Creatures/Creature.h"
+#include "../Creatures/Creature.h"
 
 class Game;
 class Creature;

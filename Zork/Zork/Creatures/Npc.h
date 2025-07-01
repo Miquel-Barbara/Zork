@@ -2,6 +2,7 @@
 #define __Npc__
 
 #include "Creature.h"
+#include "../Others/Stat.h"
 
 class Npc : public Creature {
 public:

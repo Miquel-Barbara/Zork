@@ -1,8 +1,8 @@
 #include "Room.h"
 #include "Exit.h"
 #include "RestrictedExit.h"
-#include "Objects/Object.h"
-#include "Objects/Container.h"
+#include "../Objects/Object.h"
+#include "../Objects/Container.h"
 
 Room::Room(const string& name, const string& description): Entity(name, description) {}
 

@@ -1,7 +1,8 @@
 #ifndef __Weapon__
 #define __Weapon__
 
-#include "Objects/Equipment.h"
+#include "Equipment.h"
+#include "../Others/Stat.h"
 
 class Weapon : public Equipment {
 public:

@@ -5,10 +5,10 @@ using namespace std;
 
 #include <string>
 #include <map>
-#include "Direction.h"
+#include "../Enums/Direction.h"
 #include <vector>
 #include "Exit.h"
-#include "Openable.h"
+#include "../Others/Openable.h"
 
 class Game;
 

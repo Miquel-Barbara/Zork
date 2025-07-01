@@ -4,7 +4,7 @@
 #include "../Entity.h"
 #include "Object.h"
 
-class Item : public Object {
+class Item : public virtual Object {
 public:
     Item(const string& name, const string& description);
 private:

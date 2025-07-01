@@ -6,10 +6,10 @@ using namespace std;
 #include <map>
 #include <string>
 #include <vector>
-#include "Room.h"
+#include "World/Room.h"
 #include "Commands/Command.h"
 #include "Commands/CommandFactory.h"
-#include "World.h"
+#include "World/World.h"
 #include "Objects/Item.h"
 #include "Creatures/Player.h"
 

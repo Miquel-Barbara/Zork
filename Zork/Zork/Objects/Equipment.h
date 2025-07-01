@@ -2,7 +2,7 @@
 #define __Equipment__
 
 #include "Item.h"
-#include "../Stat.h"
+#include "../Others/Stat.h"
 #include <map>
 #include <string>
 
