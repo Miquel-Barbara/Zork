@@ -57,7 +57,7 @@ Command* CreateTakeCommand() {
                         if (item) {
                             game.GetPlayer()->AddItem(item);
                             container->RemoveItem(item);
-                            cout << "Taken.\n" << endl;
+                            cout << "Taken." << endl;
                             return;
                         }
                     }
@@ -65,10 +65,10 @@ Command* CreateTakeCommand() {
             }
 
             if (item) {
-                cout << "Taken.\n" << endl;
+                cout << "Taken." << endl;
             }
             else {
-                cout << "You can't see any such thing.\n" << endl;
+                cout << "You can't see any such thing." << endl;
             }
         }
     );
@@ -83,32 +83,33 @@ Command* CreateDropCommand() {
 
             if (target == "all") {
                 if (inventory.empty()) {
-                    cout << "What do you want to drop those things in?\n";
+                    cout << "You don't have items.\n";
                 }
 
                 Room* current = game.GetPlayer()->GetCurrentRoom();
                 for (Item* item : inventory) {
                     inventory.erase(remove(inventory.begin(), inventory.end(), item), inventory.end());
                     current->AddItem(item);
+                    game.GetPlayer()->RemoveItem(item);
                     cout << item->GetName() + " : Dropped";
                 }
-
-                cout << "You drop everything.\n";
+                cout << "\n";
                 inventory.clear();
+                return;
             }
             else {
                 for (auto it = inventory.begin(); it != inventory.end(); ++it) {
                     if ((*it)->GetName() == target) {
                         Item* item = *it;
-                        inventory.erase(it);
-                        game.GetPlayer()->AddItem(item);
+                        game.GetPlayer()->RemoveItem(item);
+                        game.GetPlayer()->GetCurrentRoom()->AddItem(item);
                         cout << "Dropped.\n";
+                        return;
                     }
                 }
 
                 cout << "You can't see any such thing.\n";
             }
-            return;
         }
     );
 }

@@ -25,7 +25,6 @@ public:
 	void RemoveExit(Exit* exit);
 
 	Exit* GetExit(Direction direction) const;
-	Exit* GetRandomExit();
 
 	vector<Exit*> GetExits() const;
 

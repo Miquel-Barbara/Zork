@@ -30,16 +30,6 @@ Exit* Room::GetExit(Direction direction) const {
 	return nullptr;
 }
 
-Exit* Room::GetRandomExit() {
-
-	// Modern C++ random engine
-	std::random_device rd;
-	std::mt19937 gen(rd()); // Mersenne Twister engine
-	std::uniform_int_distribution<> distrib(0, exits.size() - 1);
-
-	return exits[distrib(gen)];
-}
-
 vector<Exit*> Room::GetExits() const {
 	return exits;
 }

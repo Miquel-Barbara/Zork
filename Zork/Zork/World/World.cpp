@@ -197,7 +197,7 @@ void World::CreateAllEnemies() {
 			{StatType::Speed, new StatValue(1)},
 			{StatType::Evasion, new StatValue(10)},
 			{StatType::Accuracy, new StatValue(30)},
-		} , { "AAAAAaAaAAAAaAAgh", "The men tries to bite you.", "The men is trying to kick you in your legs."} , "The poor mens soul is released."
+		} , { "AAAAAaAaAAAAaAAgh", "The men tries to bite you, ", "The men is trying to kick you in your legs,"} , "The poor mens soul is released,"
 		);
 	enemies.push_back(zombie);
 	zombie->Move(forest2);
@@ -224,7 +224,7 @@ void World::CreateAllEnemies() {
 			{StatType::Speed, new StatValue(1)},
 			{StatType::Evasion, new StatValue(0)},
 			{StatType::Accuracy, new StatValue(50)},
-		}, {"The troll's mighty blow drops you to your knees.", "The troll swings the bloody axe.", "The troll prepares to strike." }, "The unarmed troll cannot defend himself: He dies."
+		}, {"The troll's mighty blow drops you to your knees, ", "The troll swings the bloody axe, ", "The troll prepares to strike, " }, "The unarmed troll cannot defend himself: He dies."
 	);
 	enemies.push_back(troll);
 	troll->Move(trollRoom);

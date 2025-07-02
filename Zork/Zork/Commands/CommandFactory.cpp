@@ -4,6 +4,7 @@
 #include <cctype>
 #include "CommandGenerator.h"
 #include "../Utils.h"
+#include <set>
 
 CommandFactory::CommandFactory() {
     commands = GenerateAllCommands();
@@ -47,13 +48,20 @@ vector<string> CommandFactory::SplitInput(const string& input) {
 
 map<int, string> CommandFactory::MatchPattern(const vector<string>& args, const map<int, vector<string>>& pattern) {
     map<int, string> foundPattern;
+    set<string> matchedWords;
 
     for (const auto& pair : pattern) {
-        if (pair.first >= args.size()) continue;
+        const vector<string>& expectedWords = pair.second;
 
-        const string& word = args[pair.first];
-        if (std::find(pair.second.begin(), pair.second.end(), word) != pair.second.end()) {
-            foundPattern[pair.first] = word;
+        for (int i = 0; i < args.size(); ++i) {
+            if (foundPattern.find(i) != foundPattern.end()) continue;
+            if (matchedWords.count(args[i])) continue;
+
+            if (find(expectedWords.begin(), expectedWords.end(), args[i]) != expectedWords.end()) {
+                foundPattern[i] = args[i];
+                matchedWords.insert(args[i]);
+                break;
+            }
         }
     }
 

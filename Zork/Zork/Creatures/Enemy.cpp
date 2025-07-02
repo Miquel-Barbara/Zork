@@ -11,7 +11,7 @@ void Enemy::Tick() {
 		Player* player = dynamic_cast<Player*>(obj);
 		if (player) {
 			int descriptionToShow = RandomRange(attackDescription.size() - 1);
-			cout << attackDescription[descriptionToShow] << endl;
+			cout << attackDescription[descriptionToShow];
 			Attack(player);
 			return;
 		}
