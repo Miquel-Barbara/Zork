@@ -3,6 +3,8 @@
 #include "RestrictedExit.h"
 #include "../Objects/Object.h"
 #include "../Objects/Container.h"
+#include <random> 
+#include <ctime>
 
 Room::Room(const string& name, const string& description): Entity(name, description) {}
 
@@ -28,6 +30,16 @@ Exit* Room::GetExit(Direction direction) const {
 	return nullptr;
 }
 
+Exit* Room::GetRandomExit() {
+
+	// Modern C++ random engine
+	std::random_device rd;
+	std::mt19937 gen(rd()); // Mersenne Twister engine
+	std::uniform_int_distribution<> distrib(0, exits.size() - 1);
+
+	return exits[distrib(gen)];
+}
+
 vector<Exit*> Room::GetExits() const {
 	return exits;
 }
@@ -50,7 +62,7 @@ void Room::DescribeAll() const {
 }
 
 void Room::DescribeObjects() const {
-	for (Object* obj : GetInventory()) {
+	for (Entity* obj : GetInventory()) {
 		cout << obj->GetDescription() << endl;
 		Container* container = dynamic_cast<Container*>(obj);
 		if (container && container->IsOpen()) {

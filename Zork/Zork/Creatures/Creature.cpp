@@ -1,15 +1,38 @@
 #include "Creature.h"
+#include "../Utils.h"
 
 Creature::Creature(const string& name, const string& description, map<StatType, StatValue*> stats) : Entity(name, description), stats(stats)  {}
 
 void Creature::Move(Room* room) {
+	if (currentRoom) {
+		currentRoom->RemoveItem(this);
+	}
 	if (room != nullptr) {
 		currentRoom = room;
+		currentRoom->AddItem(this);
 	}
 }
 
 Room* Creature::GetCurrentRoom() {
 	return currentRoom;
+}
+
+void Creature::Attack(Creature* creature) {
+	if (Chance(GetStat(Accuracy) - creature->GetStat(Evasion))) {
+		int damage = GetStat(Strength);
+		cout << GetName() + " hits and deals " << to_string(damage) + " damage to " << creature->GetName() + "." << endl;
+		creature->ReceiveDamage(damage);
+	}
+	else {
+		cout << GetName() + " attacks but " << creature->GetName() +" dodge it!" << endl;
+	}
+
+	
+}
+
+void Creature::ReceiveDamage(int amount)
+{
+	stats[StatType::Hp]->Decrease(amount);
 }
 
 bool Creature::Equip(Equipment* equip) {
@@ -102,4 +125,12 @@ vector<StatType> Creature::GetAllStats() const {
 		statTypes.push_back(pair.first);
 	}
 	return statTypes;
+}
+
+bool Creature::IsDead() {
+	int hp = GetStat(StatType::Hp);
+	if (hp <= 0) {
+		return true;
+	} 
+	return false;
 }

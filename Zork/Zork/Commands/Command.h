@@ -18,7 +18,7 @@ class Command {
 public:
     using ExecuteFunc = function<void(Game& ,const vector<string>&)>;
 
-    Command(map<int, vector<string>> pattern, ExecuteFunc func): pattern(pattern), executeFunc(func) {}
+    Command(map<int, vector<string>> pattern, ExecuteFunc func, bool itTicks = true): pattern(pattern), executeFunc(func), itTicks(itTicks) {}
 
     const map<int, vector<string>>& GetPattern() const { return pattern; }
 
@@ -26,9 +26,12 @@ public:
         executeFunc(game, args);
     }
 
+    bool ItTicks() const { return itTicks; }
+
 private:
     map<int, vector<string>> pattern;
     ExecuteFunc executeFunc;
+    bool itTicks;
 };
 
 #endif

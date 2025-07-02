@@ -22,6 +22,9 @@ public:
 	void Move(Room* room);
 	Room* GetCurrentRoom();
 
+	void Attack(Creature* creature);
+	void ReceiveDamage(int amount);
+
 	bool Equip(Equipment* equipment);
 	bool Unequip(Equipment* equipment);
 
@@ -31,6 +34,8 @@ public:
 
 	int GetStat(StatType stat) const;
 	vector<StatType> GetAllStats() const;
+
+	bool IsDead();
 
 protected:
 	Room* currentRoom; 

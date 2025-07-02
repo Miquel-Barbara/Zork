@@ -19,7 +19,7 @@ Command* CreateMoveCommand() {
     return new Command(
         { {0, {"go"}} },
         [](Game& game, const vector<string>& args) {
-  
+
             Direction dir = StringToDirection(args[0]);
             Room* current = game.GetPlayer()->GetCurrentRoom();
             Exit* exit = current->GetExit(dir);
@@ -31,7 +31,7 @@ Command* CreateMoveCommand() {
             }
 
             cout << "You can't go that way.\n";
-        }
+        }, false
     );
 }
 
@@ -41,15 +41,15 @@ Command* CreateTakeCommand() {
         [](Game& game, const vector<string>& args) {
             string itemName = args[0];
             Room* current = game.GetPlayer()->GetCurrentRoom();
-            vector<Object*> entities = current->GetInventory();
+            vector<Entity*> entities = current->GetInventory();
 
-            Item* item = FindInList<Object, Item>(entities, itemName);
+            Item* item = FindInList<Entity, Item>(entities, itemName);
             if (item) {
 				game.GetPlayer()->AddItem(item);
 				current->RemoveItem(item);
             }
             else {
-                for (Object* obj : entities) {
+                for (Entity* obj : entities) {
                     Container* container = dynamic_cast<Container*>(obj);
                     if (container && container->IsOpen()) {
                         // Check if the container has the item
@@ -128,7 +128,7 @@ Command* CreateInventoryCommand() {
                     cout << "- " << item->GetName() << endl;
                 }
             }
-        }
+        }, false
     );
 }
 
@@ -146,7 +146,7 @@ Command* CreateLookCommand() {
                 cout << "You are out of the boundaries of the map. Congrats!\n";
             }
             return;
-        }
+        }, false
     );
 }
 
@@ -155,7 +155,7 @@ Command* CreateDisplayCommand(vector<string> keyword, string message) {
         { {0, keyword} },
 		[message](Game& game, const vector<string>& args) {
 			cout << message << endl;
-		}
+		}, false
 	);
 }
 
@@ -170,7 +170,7 @@ Command* CreateOpenCommand() {
                 restExit->Open();
 			}
 
-            Container* container = FindInList<Object, Container>(current->GetInventory(), args[0]);
+            Container* container = FindInList<Entity, Container>(current->GetInventory(), args[0]);
             if (container && !container->IsOpen()) {
                 container->Open();
 
@@ -251,7 +251,7 @@ Command* CreateLookEquipment() {
             cout << "- Legs: " << (legs ? legs->GetName() : "nothing") << endl;
             cout << "- Arms: " << (arms ? arms->GetName() : "nothing") << endl;
             cout << "- Boots: " << (boots ? boots->GetName() : "nothing") << endl;
-        }
+        }, false
     );
 }
 
@@ -264,7 +264,7 @@ Command* CreateStatsCommand() {
             for (StatType statType : player->GetAllStats()) {
                 cout << "- " << StatToString(statType) +": "+ to_string(player->GetStat(statType)) << endl;
             }
-		}
+		}, false
 	);
 }
 
@@ -280,7 +280,7 @@ Command* CreateStatCommand() {
 			else {
 				cout << "Invalid stat type.\n";
 			}
-        }
+        }, false
     );
 }
 
@@ -295,7 +295,7 @@ Command* CreateCloseCommand() {
                 restExit->Close();
             }
 
-            Container* container = FindInList<Object, Container>(current->GetInventory(), args[0]);
+            Container* container = FindInList<Entity, Container>(current->GetInventory(), args[0]);
             if (container && container->IsOpen()) {
 				container->Close();
 				cout << "You close the " << container->GetName();
@@ -318,7 +318,7 @@ Command* CreateQuitCommand() {
         [](Game& game, const vector<string>& args) {
             game.Quit();
             cout << "Thanks for playing! Goodbye!\n";
-        }
+        }, false
     );
 }
 
@@ -336,7 +336,7 @@ Command* CreatePutIntoCommand() {
 				return;
 			}
 
-			Container* container = FindInList<Object, Container>(game.GetPlayer()->GetCurrentRoom()->GetInventory(), containerName);
+			Container* container = FindInList<Entity, Container>(game.GetPlayer()->GetCurrentRoom()->GetInventory(), containerName);
 			if (!container || !container->IsOpen()) {
 				cout << "You can't put items into that object.\n";
 				return;
@@ -346,6 +346,23 @@ Command* CreatePutIntoCommand() {
 			container->AddItem(item);
 			cout << "You put the " << item->GetName() << " into the " << container->GetName() << ".\n";
 		}
+    );
+}
+
+Command* CreateAttackCommand() {
+    return new Command(
+        { {0, {"attack"}} },
+        [](Game& game, const vector<string>& args) {
+            vector<Entity*> entities = game.GetPlayer()->GetCurrentRoom()->GetInventory();
+            Enemy* enemy = FindInList<Entity, Enemy>(entities, args[0]);
+
+            if (enemy) {
+                game.GetPlayer()->Attack(enemy);
+                if (enemy->IsDead()) {
+                    enemy->Die();
+                }
+            }
+        }
     );
 }
 
@@ -367,6 +384,7 @@ vector<Command*> GenerateAllCommands() {
         CreateStatsCommand(),
         CreateStatCommand(),
         CreatePutIntoCommand(),
+        CreateAttackCommand(),
         CreateDisplayCommand({"help"}, "Available commands: look, go, take, drop, inventory, help"),
         CreateDisplayCommand({"bar"}, "Bar bar"),
         CreateDisplayCommand({"Zork"}, "At your service"),

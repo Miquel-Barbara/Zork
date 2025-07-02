@@ -14,9 +14,10 @@ using namespace std;
 class Game;
 class Exit;
 
-class Room : public Entity, public Inventory<Object> {
+class Room : public Entity, public Inventory<Entity> {
 public:
 	Room(const string& name, const string& description);
+	
 	void DescribeAll() const;
 	void DescribeObjects() const;
 
@@ -24,6 +25,7 @@ public:
 	void RemoveExit(Exit* exit);
 
 	Exit* GetExit(Direction direction) const;
+	Exit* GetRandomExit();
 
 	vector<Exit*> GetExits() const;
 

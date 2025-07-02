@@ -130,7 +130,7 @@
     <ClCompile Include="Commands\CommandFactory.cpp" />
     <ClCompile Include="Commands\CommandGenerator.cpp" />
     <ClCompile Include="Creatures\Creature.cpp" />
-    <ClCompile Include="Creatures\Npc.cpp" />
+    <ClCompile Include="Creatures\Enemy.cpp" />
     <ClCompile Include="Creatures\Player.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Enums\Direction.cpp" />
@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Others\Openable.cpp" />
     <ClCompile Include="Others\Stat.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="World\Exit.cpp" />
     <ClCompile Include="World\RestrictedExit.cpp" />
     <ClCompile Include="World\Room.cpp" />
@@ -156,7 +157,7 @@
     <ClInclude Include="Commands\CommandFactory.h" />
     <ClInclude Include="Commands\CommandGenerator.h" />
     <ClInclude Include="Creatures\Creature.h" />
-    <ClInclude Include="Creatures\Npc.h" />
+    <ClInclude Include="Creatures\Enemy.h" />
     <ClInclude Include="Creatures\Player.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Enums\ArmorPart.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Others\Openable.h" />
     <ClInclude Include="Others\Stat.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="World\Exit.h" />
     <ClInclude Include="World\RestrictedExit.h" />
     <ClInclude Include="World\Room.h" />

@@ -42,7 +42,7 @@
     <ClCompile Include="Game.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Creatures\Npc.cpp">
+    <ClCompile Include="Creatures\Enemy.cpp">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClCompile>
     <ClCompile Include="Commands\CommandFactory.cpp">
@@ -102,6 +102,9 @@
     <ClCompile Include="Enums\StatType.cpp">
       <Filter>Archivos de origen\Enums</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Archivos de origen\Others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\Command.h">
@@ -113,7 +116,7 @@
     <ClInclude Include="Entity.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
-    <ClInclude Include="Creatures\Npc.h">
+    <ClInclude Include="Creatures\Enemy.h">
       <Filter>Archivos de origen\Creatures</Filter>
     </ClInclude>
     <ClInclude Include="Commands\CommandFactory.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="Enums\StatType.h">
       <Filter>Archivos de origen\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Archivos de origen\Others</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

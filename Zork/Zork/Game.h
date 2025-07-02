@@ -24,6 +24,7 @@ public:
 
     void ProcessInput(const string& input);
     Player* GetPlayer();
+    void Tick();
     void Quit() { quit = true; }
     bool EndGame() const;
 

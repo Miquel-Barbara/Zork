@@ -10,13 +10,21 @@
 #include "../Objects/Armor.h"
 #include "RestrictedExit.h"
 #include "../Enums/Direction.h"
+#include "../Creatures/Enemy.h"
 
 World::World() {	
 	CreateAllRooms();
 	CreateAllConnections();
 	CreateAllItems();
+	CreateAllEnemies();
 	//Starting Room
 	startRoom = westHouse;
+}
+
+void World::Tick() {
+	for (Enemy* enemy : enemies) {
+		enemy->Tick();
+	}
 }
 
 Room* World::GetStartRoom() {
@@ -121,6 +129,8 @@ void World::CreateAllConnections() {
 
 	//----Studio----//
 	studio->AddExit(new Exit("", "", Direction::South, studio, gallery));
+
+	trollRoom->AddExit(new Exit("", "", Direction::North, trollRoom, endRoom));
 }
 
 void World::CreateAllItems() {
@@ -138,7 +148,7 @@ void World::CreateAllItems() {
 
 
 	//------------Kitchen------------//
-	ItemContainer* bottle = new ItemContainer("bottle water", "A bottle is sitting on the table.", { new Item("water", "A bottle of water.") });
+	ItemContainer* bottle = new ItemContainer("bottle", "A bottle is sitting on the table.", { new Item("water", "A bottle of water.") });
 	kitchen->AddItem(bottle);
 	ItemContainer* brownSack = new ItemContainer("brown sack", "On the table is an elongated brown sack, smelling of hot peppers.", {new Item("lunch", "I am so hungry..."), new Item("garlic", "Eww")});
 	kitchen->AddItem(brownSack);
@@ -167,9 +177,59 @@ void World::CreateAllItems() {
 	forestPath->AddItem(legs);
 
 	//------------Gallery------------//
-	Armor* arms = new Armor("gloves", "Gloves full of paint. Surely the bandits didn't find any value in them", 50, 10, 10, 0, 20, ArmorPart::Feet);
+	Armor* arms = new Armor("gloves", "Gloves full of paint remains in top of a box. Surely the bandits didn't find any value in them", 50, 10, 10, 0, 20, ArmorPart::Feet);
 	gallery->AddItem(arms);
 
-	Armor* chest2 = new Armor("armor", "A dented armor on the right side, it's as if a large object had hit it. With a little effort it will fit.", 40, 50, 10, 60, 0, ArmorPart::Feet);
+	Armor* chest2 = new Armor("armor", "In the ground there is adented armor on the right side, it's as if a large object had hit it. With a little effort it will fit.", 40, 50, 10, 60, 0, ArmorPart::Feet);
 	cellar->AddItem(chest2);
+
+	Item* note = new Item("note", "The note says take me with you");
+	endRoom->AddItem(note);
+}
+
+void World::CreateAllEnemies() {
+
+	Enemy* zombie = new Enemy("half of a man", "A half of a man body part is moving near you. Where is the rest of it?",
+		{
+			{StatType::Hp, new StatValue(30)},
+			{StatType::Strength, new StatValue(10)},
+			{StatType::Defense, new StatValue(10)},
+			{StatType::Speed, new StatValue(1)},
+			{StatType::Evasion, new StatValue(10)},
+			{StatType::Accuracy, new StatValue(30)},
+		} , { "AAAAAaAaAAAAaAAgh", "The men tries to bite you.", "The men is trying to kick you in your legs."} , "The poor mens soul is released."
+		);
+	enemies.push_back(zombie);
+	zombie->Move(forest2);
+
+	Enemy* fly = new Enemy("fly", "There is a giant fly, nearby all the food, disgusting",
+		{
+			{StatType::Hp, new StatValue(1)},
+			{StatType::Strength, new StatValue(3)},
+			{StatType::Defense, new StatValue(10)},
+			{StatType::Speed, new StatValue(1)},
+			{StatType::Evasion, new StatValue(30)},
+			{StatType::Accuracy, new StatValue(20)},
+		}, { "Bzzzzzz", "Bzz Bzzz Bzzz!", "*laughs in fly*" } , "Bzzzz...(translation: Although I have struggled throughout my short life to survive, I can be proud to die at your hands, young warrior. You have proven brave enough to face and defeat me. Your next objective is to defeat that stinking troll beneath this house... Aaaah, my last breath is almost here... That sun-marinated soup was so good...)"
+		);
+	enemies.push_back(fly);
+	fly->Move(kitchen);
+
+
+	Enemy* troll = new Enemy("troll", "There is a giant troll that measures more than 3 meters in the room, you can hardly understand how it managed to enter this room, its presence makes you tremble with fear.", 
+		{
+			{StatType::Hp, new StatValue(100)},
+			{StatType::Strength, new StatValue(30)},
+			{StatType::Defense, new StatValue(40)},
+			{StatType::Speed, new StatValue(1)},
+			{StatType::Evasion, new StatValue(0)},
+			{StatType::Accuracy, new StatValue(50)},
+		}, {"The troll's mighty blow drops you to your knees.", "The troll swings the bloody axe.", "The troll prepares to strike." }, "The unarmed troll cannot defend himself: He dies."
+	);
+	enemies.push_back(troll);
+	troll->Move(trollRoom);
+}
+
+Room* World::GetFinalRoom() {
+	return endRoom;
 }

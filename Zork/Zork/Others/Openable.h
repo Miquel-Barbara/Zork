@@ -14,7 +14,7 @@ public:
     virtual void Open();
     virtual void Close();
     virtual bool IsOpen();
-
+    virtual 
     string GetBlockedText() const { return blockedText; }
 
 protected:
