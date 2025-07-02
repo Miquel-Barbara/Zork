@@ -10,6 +10,7 @@ The game is entirely played through the **command line interface**, using the fo
 - `go {direction}` – Move in a direction (e.g., `north`, `south`, `west`, `east`, `up`, `down`)
 - `look` – Inspect your surroundings
 - `take {item}` – Pick up an item
+- `attack {enemy}` – Attacks the enemy
 - `drop {item}` – Drop an item from your inventory
 - `equip {item}` – Equip an item
 - `unequip {item}` – Unequip an item
