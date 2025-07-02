@@ -12,6 +12,7 @@ The game is entirely played through the **command line interface**, using the fo
 - `take {item}` – Pick up an item
 - `attack {enemy}` – Attacks the enemy
 - `drop {item}` – Drop an item from your inventory
+- `drop all` – Drop all the items from your inventory
 - `equip {item}` – Equip an item
 - `unequip {item}` – Unequip an item
 - `open {container/exit}` – Open a container or exit
@@ -20,7 +21,6 @@ The game is entirely played through the **command line interface**, using the fo
 - `inventory` – Check your inventory
 - `equipment` – Check your currently equipped items
 - `stats` – View your character stats
-- `help` – Show available commands
 - `quit` – Exit the game
 
 ### 🃏 Easter Egg Commands
